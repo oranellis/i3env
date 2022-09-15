@@ -1,0 +1,12 @@
+#!/bin/bash
+
+reqpkgs='base linux linux-firmware base-devel cmake iwd dhcpcd grub efibootmgr ntp
+neovim fzf nnn man man-pages git ttf-hack adobe-source-han-sans-jp-fonts arch-install-scripts xorg-server xorg-xinit xorg-xset xclip nvidia nvidia-settings nodejs npm p7zip
+i3-wm i3blocks i3status i3lock picom dmenu alacritty feh firefox unzip zip pulseaudio pulseaudio-alsa pavucontrol tlp
+udisks2 ntfs-3g scrot testdisk htop vlc xdg-utils gnome-keyring libsecret neofetch nextcloud thunar'
+pkgs='thunderbird discord baobab gparted darktable handbrake inkscape gimp playerctl'
+reqpkgsaur='xrdp xorgxrdp ly neofetch opentabletdriver pa-notify pa-applet-git exfat-utils-nofuse'
+pkgsaur='spotify slack-desktop minecraft-launcher'
+pkgsnpm=''
+services='iwd dhcpcd tlp ntpd ly'
+servicesuser='pulseaudio opentabletdriver'

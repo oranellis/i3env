@@ -1,0 +1,41 @@
+#!/bin/bash
+
+scandir=$(pwd)
+depth=4
+curdepth=1
+
+while [[ $scandir != "/" && $curdepth -lt $depth ]]
+do
+    if [[ -e $scandir/CMakeLists.txt ]]
+    then
+        echo "CMake project found at $scandir"
+        if [[ ! -d "${scandir}/build" ]]
+        then
+            echo "Creating build folder"
+            mkdir $scandir/build
+        fi
+        cd $scandir/build
+        echo "Building..."
+        cmake ..
+        make -j
+        exit 0
+
+    elif [[ -e $scandir/Makefile ]]
+    then
+        if [[ ! -d "${scandir}/build" ]]
+        then
+            echo "Creating build folder"
+            mkdir $scandir/build
+        fi
+        echo "Make project found, compiling..."
+        cd $scandir/build
+        cp ../Makefile ./
+        make -j
+        exit 0
+    fi
+    scandir=$(dirname $scandir)
+    curdepth=$curdepth+1
+done
+
+echo "No compatible build system found"
+exit 1
