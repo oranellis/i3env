@@ -1,4 +1,8 @@
 #!/bin/bash
 
-blkdev="/dev/$(echo $1 | sed -e's/\/dev\///')"
-udisksctl mount -b $blkdev
+if [ $# -ge 1 ]; then
+	blkdev="/dev/$(echo $1 | sed -e's/\/dev\///')"
+	udisksctl mount -b $blkdev
+else
+	ls --color /dev/
+fi
