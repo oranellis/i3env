@@ -8,17 +8,22 @@ while [[ $scandir != "/" && $curdepth -lt $depth ]]
 do
     if [[ -e $scandir/CMakeLists.txt ]]
     then
-        echo "CMake project found at $scandir"
-        if [[ ! -d "${scandir}/build" ]]
-        then
-            echo "Creating build folder"
-            mkdir $scandir/build
-        fi
-        cd $scandir/build
-        echo "Building..."
-        cmake ..
-        make -j
-        exit 0
+		if [[ -e $(dirname $scandir)/CMakeLists.txt ]]
+		then
+			echo "Found subdirectory at $scandir, skipping build"
+		else
+			echo "CMake project found at $scandir"
+			if [[ ! -d "${scandir}/build" ]]
+			then
+				echo "Creating build folder"
+				mkdir $scandir/build
+			fi
+			cd $scandir/build
+			echo "Building..."
+			cmake ..
+			make -j
+			exit 0
+		fi
 
     elif [[ -e $scandir/Makefile ]]
     then
