@@ -21,22 +21,20 @@ do
 			cd $scandir/build
 			echo "Building..."
 			cmake ..
-			make -j
+			make -j $1
 			exit 0
 		fi
 
     elif [[ -e $scandir/Makefile ]]
     then
-        if [[ ! -d "${scandir}/build" ]]
-        then
-            echo "Creating build folder"
-            mkdir $scandir/build
-        fi
-        echo "Make project found, compiling..."
-        cd $scandir/build
-        cp ../Makefile ./
-        make -j
-        exit 0
+		if [[ -e $(dirname $scandir)/CMakeLists.txt ]]
+		then
+			echo "Found build folder at $scandir, skipping build"
+		else
+			echo "Make project found, compiling..."
+			make -j $1
+			exit 0
+		fi
     fi
     scandir=$(dirname $scandir)
     curdepth=$curdepth+1
