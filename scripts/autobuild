@@ -32,6 +32,7 @@ do
 			echo "Found build folder at $scandir, skipping build"
 		else
 			echo "Make project found, compiling..."
+			cd $scandir
 			make -j $1
 			exit 0
 		fi
@@ -39,6 +40,7 @@ do
     elif [[ -e $scandir/platformio.ini ]]
 	then
 		echo "Found PlatformIO project, running..."
+		cd $scandir
 		pio run
 		exit 0
 	fi
