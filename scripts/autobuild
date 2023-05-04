@@ -35,7 +35,14 @@ do
 			make -j $1
 			exit 0
 		fi
-    fi
+
+    elif [[ -e $scandir/platformio.ini ]]
+	then
+		echo "Found PlatformIO project, running..."
+		pio run
+		exit 0
+	fi
+
     scandir=$(dirname $scandir)
     curdepth=$curdepth+1
 done
