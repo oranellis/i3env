@@ -1,7 +1,7 @@
 #!/bin/bash
 
 scandir=$(pwd)
-depth=4
+depth=8
 curdepth=1
 
 while [[ $scandir != "/" && $curdepth -lt $depth ]]
