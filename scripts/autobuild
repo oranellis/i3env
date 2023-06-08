@@ -4,11 +4,11 @@ scandir=$(pwd)
 depth=8
 curdepth=1
 
-while [[ $scandir != "/" && $curdepth -lt $depth ]]
+while [[ "$scandir" != "/" && $curdepth -lt $depth ]]
 do
-    if [[ -e $scandir/CMakeLists.txt ]]
+    if [[ -e "$scandir/CMakeLists.txt" ]]
     then
-		if [[ -e $(dirname $scandir)/CMakeLists.txt ]]
+		if [[ -e $(dirname "$scandir")/CMakeLists.txt ]]
 		then
 			echo "Found subdirectory at $scandir, skipping build"
 		else
@@ -16,36 +16,36 @@ do
 			if [[ ! -d "${scandir}/build" ]]
 			then
 				echo "Creating build folder"
-				mkdir $scandir/build
+				mkdir "$scandir/build"
 			fi
-			cd $scandir/build
+			cd "$scandir/build"
 			echo "Building..."
 			cmake ..
 			make -j $1
 			exit 0
 		fi
 
-    elif [[ -e $scandir/Makefile ]]
+    elif [[ -e "$scandir/Makefile" ]]
     then
-		if [[ -e $(dirname $scandir)/CMakeLists.txt ]]
+		if [[ -e $(dirname "$scandir")/CMakeLists.txt ]]
 		then
 			echo "Found build folder at $scandir, skipping build"
 		else
 			echo "Make project found, compiling..."
-			cd $scandir
+			cd "$scandir"
 			make -j $1
 			exit 0
 		fi
 
-    elif [[ -e $scandir/platformio.ini ]]
+    elif [[ -e "$scandir/platformio.ini" ]]
 	then
 		echo "Found PlatformIO project, running..."
-		cd $scandir
+		cd "$scandir"
 		pio run
 		exit 0
 	fi
 
-    scandir=$(dirname $scandir)
+    scandir=$(dirname "$scandir")
     curdepth=$curdepth+1
 done
 
