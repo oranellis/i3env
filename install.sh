@@ -68,12 +68,6 @@ sudo -u $username -H bash -c "
 mkdir -p /home/$username/Dev /home/$username/Downloads /home/$username/Media/Backgrounds
 cp -r $sourcedir/configs/.[^.]* /home/$username
 cp $sourcedir/archi3/assets/bg2.png /home/$username/Media/Backgrounds
-if [ $username = 'oran' ]; then
-	/bin/git config --global user.email \"oran.mcnair@gmail.com\"
-	/bin/git config --global user.name \"Oran Ellis\"
-	/bin/git config --global credential.helper store
-	/bin/git config --global pull.rebase false
-fi
 
 $sourcedir/archi3/scripts/aurinstall $reqpkgsaur
 "
