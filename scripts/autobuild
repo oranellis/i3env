@@ -13,15 +13,14 @@ do
 			echo "Found subdirectory at $scandir, skipping build"
 		else
 			echo "CMake project found at $scandir"
-			if [[ ! -d "${scandir}/build" ]]
-			then
-				echo "Creating build folder"
-				mkdir "$scandir/build"
-			fi
-			cd "$scandir/build"
 			echo "Building..."
-			cmake ..
-			make -j $1
+			cmake -B build
+			if [[ -z $1 ]]
+			then
+				cmake --build build -j 24
+			else
+				cmake --build build -j 24 -t $1
+			fi
 			exit 0
 		fi
 
