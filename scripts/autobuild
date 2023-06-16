@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scandir=$(pwd)
+scandir="$(pwd)"
 depth=8
 curdepth=1
 
@@ -13,7 +13,7 @@ do
 			echo "Found subdirectory at $scandir, skipping build"
 		else
 			echo "CMake project found at $scandir"
-			cd $scandir
+			cd "$scandir"
 			echo "Building..."
 			cmake -B build
 			if [[ -z $1 ]]
